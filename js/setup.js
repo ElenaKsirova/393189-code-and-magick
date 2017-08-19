@@ -45,17 +45,17 @@ var WIZARD_EYES_COLORS = [
 
 
 var createWizards = function (count) {
-  var w = [];
+  var wizards = [];
 
   for (var i = 0; i < count; i++) {
-    w[i] = {
+    wizards[i] = {
       name: getRandomItem(WIZARD_FIRST_NAMES) + ' ' + getRandomItem(WIZARD_LAST_NAMES),
       coatColor: getRandomItem(WIZARD_COAT_COLORS),
       eyesColor: getRandomItem(WIZARD_EYES_COLORS)
     };
   }
 
-  return w;
+  return wizards;
 };
 
 
