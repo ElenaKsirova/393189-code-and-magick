@@ -1,6 +1,6 @@
 'use strict';
 
-function renderStatistics(ctx, names, times) {
+window.renderStatistics = function (ctx, names, times) {
   function getMaxOfArray(arr) {
     var maxValue = 0;
 
@@ -121,4 +121,4 @@ function renderStatistics(ctx, names, times) {
 
     drawColumnCaptions(playerIndex, COL_CAPTIONS_COLOR);
   }
-}
+};
