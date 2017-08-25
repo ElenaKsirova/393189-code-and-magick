@@ -4,6 +4,9 @@ function getRandomItem(arrOfItems) {
   return arrOfItems[Math.floor(Math.random() * arrOfItems.length)];
 }
 
+var VK_ENTER = 13;
+var VK_ESC = 27;
+
 var WIZARD_FIRST_NAMES = [
   'Иван',
   'Хуан Себастьян',
@@ -43,6 +46,13 @@ var WIZARD_EYES_COLORS = [
   'green'
 ];
 
+var FIREBALL_COLORS = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
 
 var createWizards = function (count) {
   var wizards = [];
@@ -59,19 +69,8 @@ var createWizards = function (count) {
 };
 
 
-var WIZARD_COUNT = 4;
-
-var wizards = createWizards(WIZARD_COUNT);
-
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
-
-var similarListElement = userDialog.querySelector('.setup-similar-list');
-
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
-
-var renderWizard = function (wizard) {
-  var wizardElement = similarWizardTemplate.cloneNode(true);
+var renderWizard = function (wizard, template) {
+  var wizardElement = template.cloneNode(true);
 
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
@@ -80,10 +79,117 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
+
+var showSetupDialog = function () {
+  setupDialog.classList.remove('hidden');
+
+  document.addEventListener('keydown', onDocumentKeyDown);
+};
+
+var hideSetupDialog = function () {
+  setupDialog.classList.add('hidden');
+
+  document.removeEventListener('keydown', onDocumentKeyDown);
+};
+
+
+var onDocumentKeyDown = function (evt) {
+  if (evt.keyCode === VK_ESC) {
+    if (evt.target !== document.querySelector('.setup-user-name')) {
+      hideSetupDialog();
+    }
+  }
+};
+
+
+var onSetupOpenButtonClick = function () {
+  showSetupDialog();
+};
+
+var onSetupOpenButtonKeyDown = function (evt) {
+  if (evt.keyCode === VK_ENTER) {
+    showSetupDialog();
+  }
+};
+
+
+var onSetupCloseButtonClick = function () {
+  hideSetupDialog();
+};
+
+var onSetupCloseButtonKeyDown = function (evt) {
+  if (evt.keyCode === VK_ENTER) {
+    hideSetupDialog();
+  }
+};
+
+
+var onSetupSaveButtonClick = function () {
+  hideSetupDialog();
+};
+
+var onSetupSaveButtonKeyDown = function (evt) {
+  if (evt.keyCode === VK_ENTER) {
+    hideSetupDialog();
+  }
+};
+
+
+var onWizardCoatElementClick = function () {
+  this.style.fill = getRandomItem(WIZARD_COAT_COLORS);
+};
+
+
+var onWizardEyesElementClick = function () {
+  this.style.fill = getRandomItem(WIZARD_EYES_COLORS);
+};
+
+
+var onFireballElementClick = function () {
+  this.style.backgroundColor = getRandomItem(FIREBALL_COLORS);
+};
+
+
+var WIZARD_COUNT = 4;
+
+var wizards = createWizards(WIZARD_COUNT);
+
+var setupDialog = document.querySelector('.setup');
+
+var similarListElement = setupDialog.querySelector('.setup-similar-list');
+
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
+
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
+  fragment.appendChild(renderWizard(wizards[i], similarWizardTemplate));
 }
 similarListElement.appendChild(fragment);
 
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+setupDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+
+var setupUserNameInput = document.querySelector('.setup-user-name');
+setupUserNameInput.minLength = 2;
+setupUserNameInput.maxLength = 25;
+
+var setupOpenButton = document.querySelector('.setup-open');
+setupOpenButton.addEventListener('click', onSetupOpenButtonClick);
+setupOpenButton.addEventListener('keydown', onSetupOpenButtonKeyDown);
+
+var setupCloseButton = setupDialog.querySelector('.setup-close');
+setupCloseButton.addEventListener('click', onSetupCloseButtonClick);
+setupCloseButton.addEventListener('keydown', onSetupCloseButtonKeyDown);
+
+var setupSaveButton = document.querySelector('.setup-submit');
+setupSaveButton.addEventListener('click', onSetupSaveButtonClick);
+setupSaveButton.addEventListener('keydown', onSetupSaveButtonKeyDown);
+
+var wizardCoatElement = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
+wizardCoatElement.addEventListener('click', onWizardCoatElementClick);
+
+var wizardEyesElement = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
+wizardEyesElement.addEventListener('click', onWizardEyesElementClick);
+
+var fireballElement = document.querySelector('.setup-fireball-wrap');
+fireballElement.addEventListener('click', onFireballElementClick);
