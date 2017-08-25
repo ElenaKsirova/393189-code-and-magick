@@ -135,18 +135,18 @@ var onSetupSaveButtonKeyDown = function (evt) {
 };
 
 
-var onWizardCoatElementClick = function () {
-  this.style.fill = getRandomItem(WIZARD_COAT_COLORS);
+var onWizardCoatElementClick = function (evt) {
+  evt.target.style.fill = getRandomItem(WIZARD_COAT_COLORS);
 };
 
 
-var onWizardEyesElementClick = function () {
-  this.style.fill = getRandomItem(WIZARD_EYES_COLORS);
+var onWizardEyesElementClick = function (evt) {
+  evt.target.style.fill = getRandomItem(WIZARD_EYES_COLORS);
 };
 
 
-var onFireballElementClick = function () {
-  this.style.backgroundColor = getRandomItem(FIREBALL_COLORS);
+var onFireballElementClick = function (evt) {
+  evt.target.style.backgroundColor = getRandomItem(FIREBALL_COLORS);
 };
 
 
