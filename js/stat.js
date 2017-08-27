@@ -1,19 +1,6 @@
 'use strict';
 
 window.renderStatistics = function (ctx, names, times) {
-  function getMaxOfArray(arr) {
-    var maxValue = 0;
-
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i] > maxValue) {
-        maxValue = arr[i];
-      }
-    }
-
-    return maxValue;
-  }
-
-
   var WIN_LEFT = 100;
   var WIN_TOP = 10;
   var WIN_WIDTH = 420;
@@ -34,7 +21,7 @@ window.renderStatistics = function (ctx, names, times) {
   var FIRST_COL_LEFT = 140;
 
 
-  var maxTime = getMaxOfArray(times);
+  var maxTime = window.utils.getMaxOfArray(times);
 
   // вычисляем коэффициент масштабирования для столбцов, с защитой от деления на ноль
   var heightScale = (maxTime ? (COL_HEIGHT_MAX / maxTime) : COL_HEIGHT_MAX);
