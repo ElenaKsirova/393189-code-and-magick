@@ -73,14 +73,14 @@
       <div class="setup-user">
         <div class="upload">
           <img class="setup-user-pic" src="./img/user-1.jpg"/>
-          <input type="file" name="avatar">
+          <!--<input type="file" name="avatar">-->
         </div>
         <label>
-          <input type="text" name="username" class="setup-user-name" value="Синий Пендальф"/>
+          <input type="text" name="username" class="setup-user-name" value="Синий Пендальф" minlength="2" maxlength="25" required>
         </label>
       </div>
 
-      <span class="setup-close">&times;</span>
+      <span class="setup-close" tabindex="0">&times;</span>
     </div>
 
     <div class="setup-artifacts-shop">
@@ -117,7 +117,7 @@
         <input type="hidden" name="fireball-color" value="#ee4830">
       </div>
 
-      <div class="setup-artifacts" dropzone="move">
+      <div class="setup-artifacts" dropzone="copy">
         <div class="setup-artifacts-cell"></div>
         <div class="setup-artifacts-cell"></div>
         <div class="setup-artifacts-cell"></div>
@@ -199,8 +199,9 @@
   })();
 </script>
 <script src="./js/utils.js"></script>
-<script src="./js/setup.js"></script>
 <script src="./js/stat.js"></script>
 <script src="./js/game.js"></script>
+<script src="./js/setup.js"></script>
+<script src="./js/dialog.js"></script>
 </body>
 </html>

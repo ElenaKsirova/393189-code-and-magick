@@ -76,55 +76,6 @@
   };
 
 
-  var showSetupDialog = function () {
-    setupDialog.classList.remove('hidden');
-
-    document.addEventListener('keydown', onDocumentKeyDown);
-  };
-
-  var hideSetupDialog = function () {
-    setupDialog.classList.add('hidden');
-
-    document.removeEventListener('keydown', onDocumentKeyDown);
-  };
-
-
-  var onDocumentKeyDown = function (evt) {
-    window.utils.isEscPressed(evt, function () {
-      if (evt.target !== document.querySelector('.setup-user-name')) {
-        hideSetupDialog();
-      }
-    });
-  };
-
-
-  var onSetupOpenButtonClick = function () {
-    showSetupDialog();
-  };
-
-  var onSetupOpenButtonKeyDown = function (evt) {
-    window.utils.isEnterPressed(evt, showSetupDialog);
-  };
-
-
-  var onSetupCloseButtonClick = function () {
-    hideSetupDialog();
-  };
-
-  var onSetupCloseButtonKeyDown = function (evt) {
-    window.utils.isEnterPressed(evt, hideSetupDialog);
-  };
-
-
-  var onSetupSaveButtonClick = function () {
-    hideSetupDialog();
-  };
-
-  var onSetupSaveButtonKeyDown = function (evt) {
-    window.utils.isEnterPressed(evt, hideSetupDialog);
-  };
-
-
   var onWizardCoatElementClick = function (evt) {
     evt.target.style.fill = window.utils.getRandomItem(WIZARD_COAT_COLORS);
   };
@@ -158,22 +109,6 @@
 
   setupDialog.querySelector('.setup-similar').classList.remove('hidden');
 
-
-  var setupUserNameInput = document.querySelector('.setup-user-name');
-  setupUserNameInput.minLength = 2;
-  setupUserNameInput.maxLength = 25;
-
-  var setupOpenButton = document.querySelector('.setup-open');
-  setupOpenButton.addEventListener('click', onSetupOpenButtonClick);
-  setupOpenButton.addEventListener('keydown', onSetupOpenButtonKeyDown);
-
-  var setupCloseButton = setupDialog.querySelector('.setup-close');
-  setupCloseButton.addEventListener('click', onSetupCloseButtonClick);
-  setupCloseButton.addEventListener('keydown', onSetupCloseButtonKeyDown);
-
-  var setupSaveButton = document.querySelector('.setup-submit');
-  setupSaveButton.addEventListener('click', onSetupSaveButtonClick);
-  setupSaveButton.addEventListener('keydown', onSetupSaveButtonKeyDown);
 
   var wizardCoatElement = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
   wizardCoatElement.addEventListener('click', onWizardCoatElementClick);
