@@ -76,21 +76,6 @@
   };
 
 
-  var onWizardCoatElementClick = function (evt) {
-    evt.target.style.fill = window.utils.getRandomItem(WIZARD_COAT_COLORS);
-  };
-
-
-  var onWizardEyesElementClick = function (evt) {
-    evt.target.style.fill = window.utils.getRandomItem(WIZARD_EYES_COLORS);
-  };
-
-
-  var onFireballElementClick = function (evt) {
-    evt.target.style.backgroundColor = window.utils.getRandomItem(FIREBALL_COLORS);
-  };
-
-
   var WIZARD_COUNT = 4;
 
   var wizards = createWizards(WIZARD_COUNT);
@@ -111,11 +96,18 @@
 
 
   var wizardCoatElement = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
-  wizardCoatElement.addEventListener('click', onWizardCoatElementClick);
-
   var wizardEyesElement = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
-  wizardEyesElement.addEventListener('click', onWizardEyesElementClick);
-
   var fireballElement = document.querySelector('.setup-fireball-wrap');
-  fireballElement.addEventListener('click', onFireballElementClick);
+
+  var fillElement = function (element, color) {
+    element.style.fill = color;
+  };
+
+  var changeElementBackground = function (element, color) {
+    element.style.backgroundColor = color;
+  };
+
+  window.colorizeElement(wizardCoatElement, WIZARD_COAT_COLORS, fillElement);
+  window.colorizeElement(wizardEyesElement, WIZARD_EYES_COLORS, fillElement);
+  window.colorizeElement(fireballElement, FIREBALL_COLORS, changeElementBackground);
 })();
