@@ -55,15 +55,17 @@
 
 
   var onSetupSaveButtonClick = function () {
-    if (document.querySelector('setup-wizard-form').checkValidity()) {
+    if (document.querySelector('.setup-wizard-form').checkValidity()) {
       hideSetupDialog();
     }
   };
 
   var onSetupSaveButtonKeyDown = function (evt) {
-    if (document.querySelector('setup-wizard-form').checkValidity()) {
-      window.utils.isEnterPressed(evt, hideSetupDialog);
-    }
+    window.utils.isEnterPressed(evt, function () {
+      if (document.querySelector('.setup-wizard-form').checkValidity()) {
+        hideSetupDialog();
+      }
+    });
   };
 
   var setupUserNameInput = document.querySelector('.setup-user-name');
@@ -71,7 +73,7 @@
   setupUserNameInput.addEventListener('invalid', function (evt) {
     var target = evt.target;
 
-    if (!target.validity.valid) {
+    if (!(target.validity.valid)) {
       if (target.validity.tooShort) {
         target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
       } else if (target.validity.tooLong) {
@@ -82,6 +84,10 @@
     } else {
       target.setCustomValidity('');
     }
+  });
+
+  setupUserNameInput.addEventListener('input', function (evt) {
+    evt.target.setCustomValidity('');
   });
 
 
