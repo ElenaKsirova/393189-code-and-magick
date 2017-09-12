@@ -61,10 +61,10 @@
   };
 
   var onSetupSaveButtonKeyDown = function (evt) {
-    window.utils.isEnterPressed(evt, function() {
+    window.utils.isEnterPressed(evt, function () {
       if (document.querySelector('.setup-wizard-form').checkValidity()) {
         hideSetupDialog();
-      };
+      }
     });
   };
 
